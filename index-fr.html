@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Pop Demon Hunters Circuit Corée - Proposition Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px 15px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .language-switcher a {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 0 5px;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .language-switcher a.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)" /></svg>');
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .netflix-badge {
+            display: inline-block;
+            background: #e50914;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .main-title {
+            font-size: 3.2em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+        
+        .tour-details {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .detail-item {
+            text-align: left;
+        }
+        
+        .detail-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .detail-value {
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        
+        /* Content Sections */
+        .content {
+            padding: 0 40px;
+        }
+        
+        .section {
+            padding: 50px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: 300;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .section-subtitle {
+            font-size: 1.1em;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        /* Value Propositions */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .value-card {
+            background: #fff;
+            border: 1px solid #e3e6ea;
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .value-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .value-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+        
+        .value-description {
+            color: #5a6c7d;
+            line-height: 1.7;
+        }
+        
+        .metric {
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        /* Locations */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .location-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .location-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .location-content {
+            padding: 25px;
+        }
+        
+        .location-highlights {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .location-highlights li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #5a6c7d;
+            line-height: 1.5;
+        }
+        
+        .location-highlights li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        /* Product Options */
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .product-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        }
+        
+        .product-type {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .product-capacity {
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        
+        .product-features {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        
+        .product-features li {
+            padding: 5px 0;
+            color: #5a6c7d;
+        }
+        
+        .quote-time {
+            background: #e8f5e8;
+            color: #2d5a2d;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        
+        /* Inclusions */
+        .inclusions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .inclusion-section h4 {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .inclusion-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .inclusion-list li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #5a6c7d;
+        }
+        
+        .included::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .excluded::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        /* Contact */
+        .contact-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info h4 {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .contact-info p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+            }
+            
+            .header, .content {
+                padding: 30px 20px;
+            }
+            
+            .main-title {
+                font-size: 2.2em;
+            }
+            
+            .tour-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 30px 0;
+            }
+            
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+            }
+            
+            .language-switcher a {
+                padding: 6px 10px;
+                margin: 0 3px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <a href="index-en.html">EN</a>
+        <a href="index-de.html">DE</a>
+        <a href="index-fr.html" class="active">FR</a>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="netflix-badge">PHÉNOMÈNE NETFLIX #1 MONDIAL</div>
+                <h1 class="main-title">K-Pop Demon Hunters</h1>
+                <p class="subtitle">Expérience Authentique des Lieux de Tournage en Corée</p>
+                
+                <div class="tour-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Durée</div>
+                        <div class="detail-value">11 Jours / 9 Nuits</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Itinéraire</div>
+                        <div class="detail-value">Séoul • Andong • Busan • Jeju</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Langues</div>
+                        <div class="detail-value">EN / FR / DE Disponible</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Disponibilité</div>
+                        <div class="detail-value">Réservation Immédiate</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Value Proposition -->
+            <section class="section">
+                <h2 class="section-title">Pourquoi Ce Circuit Se Vend Avec Succès</h2>
+                <p class="section-subtitle">Le phénomène record de Netflix rencontre l'expérience culturelle coréenne authentique</p>
+                
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon">📊</div>
+                        <h3 class="value-title">Succès Commercial Prouvé</h3>
+                        <p class="value-description"><span class="metric">325 millions</span> de vues mondiales font de ce film le plus regardé de Netflix. Vos clients connaissent et adorent déjà le contenu.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🎬</div>
+                        <h3 class="value-title">Lieux de Tournage Authentiques</h3>
+                        <p class="value-description">Pas de répliques – vos clients visitent les <strong>véritables lieux de tournage</strong> du Palais Gyeongbokgung au Village Folklorique de Jeju.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🌟</div>
+                        <h3 class="value-title">Au-delà des Circuits K-Pop Typiques</h3>
+                        <p class="value-description">Pendant que d'autres proposent des circuits K-Pop standards, vous offrez une immersion culturelle à travers le prisme du storytelling surnaturel – positionnement unique.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">👨‍👩‍👧‍👦</div>
+                        <h3 class="value-title">Attrait Multigénérationnel</h3>
+                        <p class="value-description">Parents et enfants se retrouvent autour d'un phénomène mondial partagé – élargissant considérablement votre base de réservations.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">📱</div>
+                        <h3 class="value-title">Potentiel Réseaux Sociaux</h3>
+                        <p class="value-description">Des arrière-plans reconnaissables du contenu viral TikTok et Instagram génèrent une promotion organique pour votre entreprise.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🌉</div>
+                        <h3 class="value-title">Passerelle Culturelle</h3>
+                        <p class="value-description">Les traditions coréennes deviennent accessibles à travers une porte d'entrée de culture pop familière – réduisant les barrières culturelles.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Locations -->
+            <section class="section">
+                <h2 class="section-title">Expérience Authentique des Lieux de Tournage</h2>
+                <p class="section-subtitle">6 points forts régionaux avec signification culturelle prouvée</p>
+                
+                <div class="locations-grid">
+                    <div class="location-card">
+                        <div class="location-header">Séoul Royal & Historique</div>
+                        <div class="location-content">
+                            <ul class="location-highlights">
+                                <li>Palais Gyeongbokgung (scènes de flashback de Jinwoo)</li>
+                                <li>Village Hanok de Bukchon (rendez-vous de Rumi & Jinwoo)</li>
+                                <li>Rue des Arts d'Insadong</li>
+                                <li>Temple Jogyesa (traditions bouddhistes)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="location-card">
+                        <div class="location-header">Séoul K-Pop Moderne</div>
+                        <div class="location-content">
+                            <ul class="location-highlights">
+                                <li>COEX K-POP Square (première du MV 'Golden' de Huntrix)</li>
+                                <li>Observatoire Seoul Sky (décor du Huntrix Lodge)</li>
+                                <li>Fleuve Han (trajectoire de vol de Rumi)</li>
+                                <li>Quartier Gangnam Style</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="location-card">
+                        <div class="location-header">Culture de Rue de Séoul</div>
+                        <div class="location-content">
+                            <ul class="location-highlights">
+                                <li>Tour de Namsan (lieu de la bataille finale des Saja Boys)</li>
+                                <li>Myeongdong (lieu de performance de rue)</li>
+                                <li>DDP & Dongdaemun Design Plaza</li>
+                                <li>Marché Gwangjang (street food authentique)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="location-card">
+                        <div class="location-header">Patrimoine UNESCO (Andong)</div>
+                        <div class="location-content">
+                            <ul class="location-highlights">
+                                <li>Village de Hahoe (origines des chasseurs de la dynastie Joseon)</li>
+                                <li>Académie Confucéenne Byeongsan Seowon</li>
+                                <li>Performance de Danse Masquée Traditionnelle</li>
+                                <li>Architecture Hanok Authentique</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="location-card">
+                        <div class="location-header">Busan Côtier</div>
+                        <div class="location-content">
+                            <ul class="location-highlights">
+                                <li>Marché aux Poissons de Jagalchi</li>
+                                <li>Place BIFF (Festival International du Film de Busan)</li>
+                                <li>Temple Haedong Yonggungsa au Bord de Mer</li>
+                                <li>Plage de Haeundae & Mémorial de l'ONU</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="location-card">
+                        <div class="location-header">Jeju Mystique</div>
+                        <div class="location-content">
+                            <ul class="location-highlights">
+                                <li>Village Folklorique (motif du sanctuaire Seonangdang)</li>
+                                <li>Tombes des Chasseurs (histoire chamanique authentique)</li>
+                                <li>Sentier Volcanique Oreum ou Pic Seongsan Sunrise</li>
+                                <li>Tube de Lave Manjanggul (UNESCO)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Options -->
+            <section class="section">
+                <h2 class="section-title">Options de Produit</h2>
+                <p class="section-subtitle">Solutions flexibles pour différents segments de clientèle</p>
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <h3 class="product-type">FIT (Circuits Privés)</h3>
+                        <div class="product-capacity">2-8 Personnes</div>
+                        <ul class="product-features">
+                            <li><strong>Transport :</strong> Berline/van privé + guide multilingue</li>
+                            <li><strong>Flexibilité :</strong> Programme personnalisé</li>
+                            <li><strong>Service Premium :</strong> Service photographique personnel</li>
+                            <li><strong>Options :</strong> Danse K-POP, K-Beauty, Hanbok, Croisière sur le Han</li>
+                        </ul>
+                        <div class="quote-time">Devis en 24h (Jours ouvrables, KST)</div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <h3 class="product-type">Séries de Groupe</h3>
+                        <div class="product-capacity">15-30 Personnes</div>
+                        <ul class="product-features">
+                            <li><strong>Politique FOC :</strong> 15+1 (Terrestre uniquement ; TL double)</li>
+                            <li><strong>Transport :</strong> Autocar dédié + guide multilingue</li>
+                            <li><strong>Efficacité Coût :</strong> Tarifs groupes optimisés</li>
+                            <li><strong>Activités Groupe :</strong> Éléments spéciaux de team-building</li>
+                        </ul>
+                        <div class="quote-time">Devis en 48h (Jours ouvrables, KST)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inclusions -->
+            <section class="section">
+                <h2 class="section-title">Prestations</h2>
+                <p class="section-subtitle">Répartition transparente des coûts pour un calcul précis</p>
+                
+                <div class="inclusions-grid">
+                    <div class="inclusion-section">
+                        <h4>Prestations Standards Incluses</h4>
+                        <ul class="inclusion-list">
+                            <li class="included">9 nuits hôtels (3-4★) avec petit-déjeuner quotidien</li>
+                            <li class="included">Autocar privé selon itinéraire</li>
+                            <li class="included">2 vols intérieurs (Busan→Jeju, Jeju→Séoul)</li>
+                            <li class="included">Entrées principales (palais, Seoul Sky, village folklorique)</li>
+                            <li class="included">Guide local professionnel (EN/FR/DE)</li>
+                            <li class="included">Tous péages et frais de stationnement</li>
+                            <li class="included">Assurance voyage complète</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="inclusion-section">
+                        <h4>Non Inclus</h4>
+                        <ul class="inclusion-list">
+                            <li class="excluded">Vols internationaux</li>
+                            <li class="excluded">Certains repas (spécifiés dans l'itinéraire détaillé)</li>
+                            <li class="excluded">Pourboires guide/chauffeur</li>
+                            <li class="excluded">Dépenses personnelles</li>
+                            <li class="excluded">Options supplémentaires</li>
+                            <li class="excluded">Frais de bagages vols intérieurs</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Operations -->
+            <section class="section">
+                <h2 class="section-title">Opérations & Responsabilité Culturelle</h2>
+                <p class="section-subtitle">Service professionnel avec respect des cultures locales</p>
+                
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h3 class="value-title">Expérience Authentique</h3>
+                        <p class="value-description">Visites de véritables lieux de tournage avec interprétation culturelle respectueuse – non officiellement licencié mais culturellement précis.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🛡️</div>
+                        <h3 class="value-title">Garanties de Sécurité</h3>
+                        <p class="value-description">Certaines scènes utilisent des effets composites/CG ; toutes les règles de sécurité s'appliquent (ex : pas d'escalade des murs de forteresse au Parc Naksan).</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">⚡</div>
+                        <h3 class="value-title">Opérations Flexibles</h3>
+                        <p class="value-description">La séquence quotidienne peut s'ajuster selon la disponibilité des sites, le trafic ou les conditions météorologiques.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🤝</div>
+                        <h3 class="value-title">Respect de la Communauté</h3>
+                        <p class="value-description">Tous les lieux honorent les résidents locaux et les sites du patrimoine culturel – tourisme durable en priorité.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact -->
+        <footer class="contact-section">
+            <h2 style="font-size: 2.5em; margin-bottom: 20px; font-weight: 300;">Prêt pour Votre Succès ?</h2>
+            <p style="font-size: 1.2em; opacity: 0.9; margin-bottom: 40px;">Contactez JIGI TRAVEL pour des propositions sur mesure</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-info">
+                        <h4>Demandes par Email</h4>
+                        <p>contact@jigitravel.com</p>
+                        <small>Réponse sous 24h garantie</small>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-info">
+                        <h4>Contact Direct</h4>
+                        <p>+82 10 7904 8896</p>
+                        <small>WhatsApp & WeChat disponibles</small>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🌐</div>
+                    <div class="contact-info">
+                        <h4>Plus d'Informations</h4>
+                        <p>jigitravel.com</p>
+                        <small>Portfolio & références en ligne</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); opacity: 0.7;">
+                <p>Formulaires de demande complets disponibles | Estimations de coûts instantanées | Solutions B2B personnalisées</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
